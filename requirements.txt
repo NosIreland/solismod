@@ -1,0 +1,2 @@
+umodbus
+paho-mqtt
