@@ -1,3 +1,4 @@
+# ver. 0.0.5
 import paho.mqtt.client as mqtt
 import config.config as config
 import config.registers as registers

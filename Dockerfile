@@ -3,11 +3,8 @@ FROM python:3-alpine
 LABEL MAINTAINER="Andrius Kozeniauskas"
 LABEL NAME=solismod
 
-RUN mkdir /solismod \
-  && mkdir /solismod/pysolarmanv5
+RUN mkdir /solismod
 COPY *.py *.txt /solismod/
-COPY pysolarmanv5/* /solismod/pysolarmanv5/
-COPY config/* /solismod/config/
 
 WORKDIR /solismod
 
