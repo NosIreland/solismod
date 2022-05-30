@@ -1,4 +1,6 @@
-# ver. 0.0.5
+# ver. 0.0.6
+import time
+
 import paho.mqtt.client as mqtt
 import config.config as config
 import config.registers as registers
@@ -22,9 +24,11 @@ def modify_solis(topic, payload):
 
     try:
         current_value = (modbus.read_holding_registers(register_addr=reg, quantity=1))[0]
+        time.sleep(0.5)
         if current_value != new_value:
             logging.info(f'Changing register {reg} topic {topic} value from {current_value} to {new_value}')
             modbus.write_holding_register(register_addr=reg, value=int(payload))
+            time.sleep(0.5)
         else:
             logging.info(f'Register {reg} topic {topic} value is already {new_value} not changing')
 
@@ -45,7 +49,7 @@ def on_message(client, userdata, msg):
         logging.debug(f'Message received [{msg.topic}]: {msg.payload}')
         modify_solis(msg.topic, msg.payload)
     except Exception as e:
-        logging.error(f'Erro on receive message {repr(e)}')
+        logging.error(f'Error on receive message {repr(e)}')
 
 
 if __name__ == '__main__':
