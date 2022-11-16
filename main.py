@@ -1,11 +1,15 @@
-# ver. 0.0.7
+# ver. 0.0.8
 import time
-
+import os
 import paho.mqtt.client as mqtt
 import config.config as config
 import config.registers as registers
 from pysolarmanv5.pysolarmanv5 import PySolarmanV5
 import logging
+
+pid = str(os.getpid())
+with open("/tmp/main.pid", "w") as f:
+    f.write(pid)
 
 topics = []
 debug = 0
